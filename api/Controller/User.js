@@ -45,29 +45,28 @@ const usuario = async (req, res, next) => {
   
 
   //********************************************** */
-  // const login = async (req,res,msg) =>{
-  //   const correo = req.params.usuario;
-  //   const password = req.params.password;
-  //   if(!correo || !password){
-  //       res.json({Message:"Debe ingresar el usuario y la contraseña"});
-  //   }
-  //   conexionModelo.login(correo,password)
-  //   .then(existe=>{
-  //       if(existe[0]){
-  //         // Se envia el id del usuario logeado para buscar la informacion de el y sus cursos
-  //         req.params.usuario = existe[0].ingreso;
-  //         // Se llama a la funcion para consultar los datos del usuario.
-  //         getUsuario(req, res, msg);
-  //       }else{
-  //         var datos = {};
-  //         datos['infoUsuario'] = null;
-  //         return res.json(datos);
-  //       }
-  //   })
-  //   .catch(err=>{
-  //       res.json({Message:"Eror en la consulta: "+err.message});
-  //   })
-  // };
+  const login = async (req,res,msg) =>{
+    const { correo, password } = req.body;
+    if(!correo || !password){
+        res.json({Message:"Debe ingresar el usuario y la contraseña"});
+    }
+    conexionModelo.login(correo,password)
+    .then(existe=>{
+        if(existe[0]){
+          // Se envia el id del usuario logeado para buscar la informacion de el y sus cursos
+          req.params.usuario = existe[0].ingreso;
+          // Se llama a la funcion para consultar los datos del usuario.
+          getUsuario(req, res, msg);
+        }else{
+          var datos = {};
+          datos['infoUsuario'] = null;
+          return res.json(datos);
+        }
+    })
+    .catch(err=>{
+        res.json({Message:"Eror en la consulta: "+err.message});
+    })
+  };
 
   //********************************************** */
   const obtenerCurso = async (req,res,msg) =>{
@@ -106,10 +105,34 @@ const usuario = async (req, res, next) => {
     })
   }
 
+  //************************************************ */
+
+  // Incrision 
+
+  const inscripcionContoler = async (req,res,msg) =>{
+    const { usuarios_user_id,cursos_id_cursos,avance,horasvistas,nivel_aprendizaje,nota,sw_estado} = req.body;
+    if(!usuarios_user_id || !cursos_id_cursos || !avance || !horasvistas || !nivel_aprendizaje || !nota || !sw_estado){
+      res.json({Message:"Faltan datos!!"});
+    }
+    conexionModelo.inscripcion(usuario)
+    .then(existe=>{ // "Existe" Informacion obtenida de la BDD
+        if(existe[0]){
+          // Se envia la informacion consultada
+          return res.json(existe);
+        }else{
+          return res.json({Message:"No se encontraron datos"});
+        }
+    })
+    .catch(err=>{ // Se envia el mensaje, por si hay error en la consulta
+        res.json({Message:"Eror en la consulta: "+err.message});
+    })
+  }
+
   module.exports = {
     usuario,
     getUsuario,
-    // login,
+    login,
     obtenerCurso,
-    cursosUser
+    cursosUser,
+    inscripcionContoler
   };
