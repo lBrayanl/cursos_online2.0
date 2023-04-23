@@ -1,8 +1,10 @@
 const pool = require("../conexion");
 const conexionModelo = require("../Model/modelo");
+const bcrypt = require('bcrypt');
 
 //********************************************** */
 const nuevo_Usuario = async (req, res, next) => {
+    console.log(req.body);
     const { nombre_1,nombre_2,apellido_1, apellido_2, sw_estado,edad,genero,correo,password } = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
     
