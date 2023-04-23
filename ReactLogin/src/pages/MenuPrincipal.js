@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Cursos from '../componentes/cursoMenu';
+import '../css/Login.css'
 
 function MenuPrincipal() {
   const [isLogged, setIsLogged] = useState(!!window.localStorage.getItem('usuario'));
@@ -28,7 +28,6 @@ function MenuPrincipal() {
   return (
     <div>
       <Navbar>
-        <Container>
           <Navbar.Brand href="./">CursosOnline</Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
@@ -48,7 +47,6 @@ function MenuPrincipal() {
               </a>
             </Navbar.Text>
           </Navbar.Collapse>
-        </Container>
       </Navbar>
     </div>
   );

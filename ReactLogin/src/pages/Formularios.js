@@ -93,10 +93,10 @@ const onSubmit = (e) => {
 
 
 return (
-  <div className='container'>
+  <div>
         <MenuPrincipal/>
         <br/>
-        <div className="containerPrincipal">
+        <div className="containerForm">
 
           <main>
             <Formulario action="" onSubmit={onSubmit} >

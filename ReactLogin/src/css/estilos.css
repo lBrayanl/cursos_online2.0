@@ -17,19 +17,24 @@ main{
     margin: auto;
     padding: 40px;
 }
-ul li {
-    list-style-type: none;
- }
-li{
-    display: inherit;
-    align-items: center;
-    margin: 5px;
-    border-top: 1px solid #080808;
-}
+
 
 .containerCurso{
     display:inline-flex;
-    margin-bottom: 5px;
-    margin-left: 10px;
+    width: 1200px;
+    min-height: 350px;
+    height: 450px;
+    text-align: center;
+    font-size: 15px;
+    padding: 4%;
 
+}
+.card{
+    display:inline-flex;
+    width: 1200px;
+    min-height: 350px;
+    height: 450px;
+    text-align: center;
+    font-size: 15px;
+    padding: 4%;   
 }

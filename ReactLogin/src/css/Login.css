@@ -10,6 +10,19 @@
       padding: 2%;
       background-image: linear-gradient(-225deg, #fdfffe 50%, #f8f4f7 50%);
   }
+
+  .containerForm {
+    
+    width: 770px;
+    min-height: 450px;
+    height: auto;
+    border: 1px solid #b3b1b1 ;
+    border-radius: 5px;
+    margin: 2% auto;
+    box-shadow: 0 9px 50px hsla(0, 17%, 98%, 0.31);
+    padding: 2%;
+    background-color: #f8f4f7;
+}
   .container,
   .container-fluid,
   .container-xxl,
@@ -52,16 +65,16 @@
 }
 
   .containerSecundario{
-    width: 450px;
+    width: 950px;
     min-height: 500px;
     text-align: center;
     font-size: 15px;
     padding: 4%;
   }
 
-  .containerCarousel{
-    width: 900px;
-    min-height: 350px;
+  .containerCa{
+    width: 400px;
+    min-height: 490px;
     text-align: center;
     font-size: 15px;
     padding: 4%;
@@ -84,17 +97,6 @@
     box-sizing: border-box;
 }
 
-body {
-background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
-background-image: linear-gradient(to top, #fcffff 0%,#fcfffe  100%);
-background-attachment: fixed;
-background-repeat: no-repeat;
-font-family: 'Vibur', cursive;
-font-family: 'Abel', sans-serif;
-opacity: .95;
-font-size: 15px;
-color: black;
-}
 
 
 
@@ -236,14 +238,7 @@ button:hover {
 button:hover {
     animation: ani9 0.4s ease-in-out infinite alternate;
 }
-@keyframes ani9 {
-    0% {
-        transform: translateY(3px);
-    }
-    100% {
-        transform: translateY(5px);
-    }
-}
+
 
 
 .img-fluid {
@@ -252,13 +247,18 @@ button:hover {
   }
   
 nav{
-   background-color: #1c88fc;
-   padding: 4%;
-   color: white;
+   background-color: #11ad1e;
+   padding: 2px 7px 2px 7px;
+   color: rgb(243, 235, 235);
    border: none;
    cursor: pointer;
-   padding:20px;
    margin-top:20px;
+   list-style-type: none;
+   text-align: center;
+
+}
+a{
+    padding: 2px 7px 2px 7px;
 
 }
 .accordion-button{

@@ -14,7 +14,7 @@ class Inicio extends Component {
         return (
             <div>
                  <MenuPrincipal/>
-                <div className='container'>                    
+                <div className='containerSecundario'>                    
                     <br/>
                     <h4>Cursos para dar tus primeros pasos en Programación</h4>
                     <Cards/><br/>

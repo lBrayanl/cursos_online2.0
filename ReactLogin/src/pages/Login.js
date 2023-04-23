@@ -47,9 +47,9 @@ const Login = () => {
     return (
         
         <div className="containerPrincipal">
-            <div className="containerSecundario">
+            <div className="containerCa">
                 <header className="head-form">
-                    <h2>Log In Cursos Online</h2>
+                    <h2>CursosON</h2>
                     <p>Ingrese su usuario y contraseña!</p>
                 </header>
                 <form className="form-group" onSubmit={SessionDataStorage}>
@@ -78,8 +78,8 @@ const Login = () => {
                     <button variant="primary" className='iniciar' type="submit" onClick={login}>Iniciar Sesión</button>
                 </form>
                 <div className="other">
-                    <button className="btn submits frgt-pass">Forgot Password</button>
-                    <button className="btn submits frgt-pass" onClick={crearUsuario}>Crear Usuario
+                   
+                    <button variant="primary"  onClick={crearUsuario}>Crear Usuario
                         <i className="fa fa-user-plus" aria-hidden="true"></i>
                     </button>
                 </div>
