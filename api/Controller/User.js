@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 
 //********************************************** */
 const nuevo_Usuario = async (req, res, next) => {
-    console.log(req.body);
     const { nombre_1,nombre_2,apellido_1, apellido_2, sw_estado,edad,genero,correo,password } = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
     
@@ -20,21 +19,16 @@ const nuevo_Usuario = async (req, res, next) => {
   //********************************************** */
   
   const getUsuario = async (req, res, msg) => {
-    try {
+    // Se obtiene el usuario a consultar
+    const usuarioObtener = req.params.usuario;
 
-      // Se obtiene el usuario a consultar
-      const usuarioObtener = req.params.usuario;
-      const allUsuario = await pool.query("SELECT * FROM usuarios");
-
-      // Se declara "datos" como un objeto para enviar la informacion de los cursos y el usuario
-      var datos = {};
-      datos['infoUsuario'] = allUsuario.rows;
-      return res.json(datos);
-
-    } catch (error) {
-      msg(error ," verificar");
-      return console.log(error);
-    }
+    conexionModelo.obtener(usuarioObtener)
+    .then(existe=>{
+      return res.json(existe);
+    })
+    .catch(err=>{
+        return res.json({Message:"Eror en la consulta: "+err.message});
+    })
   };
 
 

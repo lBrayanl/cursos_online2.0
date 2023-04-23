@@ -2,8 +2,8 @@ const conexion = require('../conexion');
 const bcrypt = require('bcrypt');
 module.exports = {
    
-    async obtener(){
-        sql = 'SELECT * FROM usuarios;';
+    async obtener(id){
+        sql = 'SELECT * FROM usuarios WHERE user_id = '+id+';';
         const resultados = await conexion.query(sql);
         return resultados.rows;
     },
@@ -11,6 +11,7 @@ module.exports = {
         // Se busca coincidencias con las credenciales
         sql = "SELECT * FROM login WHERE email = '"+correo+"'";
         const resultados = await conexion.query(sql);
+    
         // Si el usuario no existe
         if (!resultados.rows[0]) {
             return resultados;
@@ -18,6 +19,7 @@ module.exports = {
         // Si el usuario existe, verifica la contraseña cifrada.
         const usuario = resultados.rows[0];
         const match = await bcrypt.compare(password, usuario.password);
+
         // Si la contraseña no coincide, devuelve un mensaje de error.
         if (!match) {
             return res.status(401).json({ message: 'Correo o contraseña incorrectos.' });
@@ -39,8 +41,6 @@ module.exports = {
         const inscritos = await conexion.query(
         `INSERT INTO inscritos (usuarios_user_id,cursos_id_cursos,avance,horasvistas,nivel_aprendizaje,nota,sw_estado) VALUES ($1, $2,$3, $4,$5,$6,$7)`,
         [usuarios_user_id,cursos_id_cursos,avance,horasvistas,nivel_aprendizaje,nota,sw_estado]);
-
-        console.log(inscritos);
         res.json(inscritos.rows[0])
     },
     async GetInscrito (req, res, msg){
