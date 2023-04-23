@@ -8,19 +8,19 @@ import Footer from '../pages/footer';
 
 
 const Formularios = () => {
-  const [usuario, cambiarUsuario] = useState({campo: '', valido: null});
-  const [nombre1, cambiarNombre1] = useState({campo: '', valido: null});
-  const [nombre2, cambiarNombre2] = useState({campo: '', valido: null});
-  const [apellido1, cambiarApellido1] = useState({campo: '', valido: null});
-  const [apellido2, cambiarApellido2] = useState({campo: '', valido: null});
-  const [password, cambiarPassword] = useState({campo: '', valido: null});
-  const [password2, cambiarPassword2] = useState({campo: '', valido: null});
-  const [correo, cambiarCorreo] = useState({campo: '', valido: null});
-  const [telefono, cambiarTelefono] = useState({campo: '', valido: null});
-  const [edad, cambiarEdad] = useState({campo: '', valido: null});
+  const [usuario, cambiarUsuario] = useState({usuario: '', valido: null});
+  const [nombre1, cambiarNombre1] = useState({nombre1: '', valido: null});
+  const [nombre2, cambiarNombre2] = useState({nombre2: '', valido: null});
+  const [apellido1, cambiarApellido1] = useState({apellido1: '', valido: null});
+  const [apellido2, cambiarApellido2] = useState({apellido2: '', valido: null});
+  const [password, cambiarPassword] = useState({password: '', valido: null});
+  const [password2, cambiarPassword2] = useState({password2: '', valido: null});
+  const [correo, cambiarCorreo] = useState({correo: '', valido: null});
+  const [telefono, cambiarTelefono] = useState({telefono: '', valido: null});
+  const [edad, cambiarEdad] = useState({edad: '', valido: null});
   const [terminos, cambiarTerminos] = useState(false);
   const [formularioValido, cambiarFormularioValido] = useState(null);
-  const [genero, cambiarGenero] = useState({campo: '', valido: null});
+  const [genero, cambiarGenero] = useState({genero: '', valido: null});
 
   const expresiones = {
 		usuario: /^[a-zA-Z0-9_-]{4,16}$/, // Letras, numeros, guion y guion_bajo
@@ -73,6 +73,7 @@ const onSubmit = (e) => {
         edad.valido === 'true' &&
         terminos
       ){
+        console.log(nombre1,nombre2,apellido1,apellido2,edad,genero,correo,password)
         // Inicia el envio de informacion a la API para su insert.
         fetch("/nuevoUsuario", {
           method: "POST",
@@ -80,7 +81,8 @@ const onSubmit = (e) => {
           
           // Por favor ingresar los datos del formulario en ese orden nombre_1,nombre_2,apellido_1, apellido_2, sw_estado,edad,genero,correo,password
           // Aun no no probe esto pero puede que funcione como esta, si no, toca que lo mires.
-          body: JSON.stringify({ nombre_1:nombre1,nombre_2:nombre2,apellido_1:apellido1, apellido_2:apellido2, sw_estado:1,edad:edad,genero:genero,correo:correo,password:password })
+          body: JSON.stringify({ nombre_1:nombre1.campo,nombre_2:nombre2.campo,apellido_1:apellido1.campo, apellido_2:apellido2.campo, sw_estado:1,edad:edad.campo,genero:genero.campo,correo:correo.campo,password:password.campo })
+         
         })
         .then((res)=>res.json())
         .then((data)=>{
