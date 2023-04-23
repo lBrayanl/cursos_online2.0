@@ -75,14 +75,13 @@ const onSubmit = (e) => {
       ){
         console.log(nombre1,nombre2,apellido1,apellido2,edad,genero,correo,password)
         // Inicia el envio de informacion a la API para su insert.
-        fetch("/nuevoUsuario", {
+        fetch("http://localhost:4000/nuevoUsuario", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           
           // Por favor ingresar los datos del formulario en ese orden nombre_1,nombre_2,apellido_1, apellido_2, sw_estado,edad,genero,correo,password
           // Aun no no probe esto pero puede que funcione como esta, si no, toca que lo mires.
-          body: JSON.stringify({ nombre_1:nombre1.campo,nombre_2:nombre2.campo,apellido_1:apellido1.campo, apellido_2:apellido2.campo, sw_estado:1,edad:edad.campo,genero:genero.campo,correo:correo.campo,password:password.campo })
-         
+          body: JSON.stringify({ nombre_1:nombre1,nombre_2:nombre2,apellido_1:apellido1, apellido_2:apellido2, sw_estado:1,edad:edad,genero:genero,correo:correo,password:password })
         })
         .then((res)=>res.json())
         .then((data)=>{

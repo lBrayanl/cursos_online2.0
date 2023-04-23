@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import '../css/Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();

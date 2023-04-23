@@ -5,7 +5,7 @@ const {nuevo_Usuario, getUsuario, obtenerCurso, cursosUser, _login, inscripcionC
 
 const router = Router();
 
-router.get("/nuevoUsuario",nuevo_Usuario)
+router.post("/nuevoUsuario",nuevo_Usuario)
 
 router.get("/getUsuario",getUsuario)
 
