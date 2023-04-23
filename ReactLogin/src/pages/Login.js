@@ -37,9 +37,8 @@ const Login = () => {
             .then((res)=>res.json())
             .then((data)=>{
                 // En "data" esta toda la informacion del usuairo y sus cursos
-                if(data.infoUsuario){
-                    const infoUsuario0 = data.infoUsuario[0];;
-                    const user_id = infoUsuario0.user_id;
+                if(data[0]){
+                    const user_id = data[0].user_id;
                     localStorage.setItem("user_id", user_id);   
                     window.location.href="./";
                 }else{
