@@ -1,23 +1,18 @@
 const pool = require("../conexion");
-const conexionModelo = require("../modelo");
-const bcrypt = require('bcrypt');
+const conexionModelo = require("../Model/modelo");
 
 //********************************************** */
-const usuario = async (req, res, next) => {
-    try {
-      const { nombre_1,nombre_2,apellido_1, apellido_2, sw_estado,edad,genero,correo,password} = req.body;
-      const hashedPassword = bcrypt.hashSync(password, 10);
-      const newUsuario = await pool.query(
-        `INSERT INTO usuarios (nombre_1,nombre_2,apellido_1, apellido_2, sw_estado,edad,genero,correo,password) VALUES ($1, $2,$3, $4,$5,$6,$7,$8,$9)`,
-        [nombre_1,nombre_2,apellido_1, apellido_2, sw_estado,edad,genero ,correo,hashedPassword]);
-
-      console.log(newUsuario);
-      res.json(newUsuario.rows[0])
-
-    } catch (error) {
-      next(error);
-      console.log(error);
-    }
+const nuevo_Usuario = async (req, res, next) => {
+    const { nombre_1,nombre_2,apellido_1, apellido_2, sw_estado,edad,genero,correo,password } = req.body;
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    
+    conexionModelo.nuevoUsuario(nombre_1,nombre_2,apellido_1, apellido_2, sw_estado,edad,genero,correo,hashedPassword)
+    .then(existe=>{
+        return res.json(existe);
+    })
+    .catch(err=>{
+        return res.json({Message:"Eror en la consulta: "+err.message});
+    })
   };
 
   //********************************************** */
@@ -45,16 +40,16 @@ const usuario = async (req, res, next) => {
   
 
   //********************************************** */
-  const login = async (req,res,msg) =>{
+  const _login = async (req,res,msg) =>{
     const { correo, password } = req.body;
     if(!correo || !password){
-        res.json({Message:"Debe ingresar el usuario y la contraseña"});
+        return res.json({Message:"Debe ingresar el usuario y la contraseña"});
     }
     conexionModelo.login(correo,password)
     .then(existe=>{
         if(existe[0]){
           // Se envia el id del usuario logeado para buscar la informacion de el y sus cursos
-          req.params.usuario = existe[0].ingreso;
+          req.params.usuario = existe[0].usuarios_user_id;
           // Se llama a la funcion para consultar los datos del usuario.
           getUsuario(req, res, msg);
         }else{
@@ -64,7 +59,7 @@ const usuario = async (req, res, next) => {
         }
     })
     .catch(err=>{
-        res.json({Message:"Eror en la consulta: "+err.message});
+        return res.json({Message:"Eror en la consulta: "+err.message});
     })
   };
 
@@ -129,9 +124,9 @@ const usuario = async (req, res, next) => {
   }
 
   module.exports = {
-    usuario,
+    nuevo_Usuario,
     getUsuario,
-    login,
+    _login,
     obtenerCurso,
     cursosUser,
     inscripcionContoler

@@ -73,22 +73,36 @@ const onSubmit = (e) => {
         edad.valido === 'true' &&
         terminos
       ){
-            cambiarFormularioValido(true);
-            cambiarUsuario({campo: '', valido: ''});
-            cambiarNombre1({campo: '', valido: null});
-            cambiarNombre2({campo: '', valido: null});
-            cambiarGenero({campo: '', valido: null});
-            cambiarApellido1({campo: '', valido: null});
-            cambiarApellido2({campo: '', valido: null});
-            cambiarPassword({campo: '', valido: null});
-            cambiarPassword2({campo: '', valido: 'null'});
-            cambiarCorreo({campo: '', valido: null});
-            cambiarTelefono({campo: '', valido: null});
-            
-          }else{
-            cambiarFormularioValido(false);
-          }
+        // Inicia el envio de informacion a la API para su insert.
+        fetch("/nuevoUsuario", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          
+          // Por favor ingresar los datos del formulario en ese orden nombre_1,nombre_2,apellido_1, apellido_2, sw_estado,edad,genero,correo,password
+          // Aun no no probe esto pero puede que funcione como esta, si no, toca que lo mires.
+          body: JSON.stringify({ nombre_1:nombre1,nombre_2:nombre2,apellido_1:apellido1, apellido_2:apellido2, sw_estado:1,edad:edad,genero:genero,correo:correo,password:password })
+        })
+        .then((res)=>res.json())
+        .then((data)=>{
+            // En "data" esta la informacion de si fue o no, exitoso.
+            console.log(data);
+        });
+        cambiarFormularioValido(true);
+        cambiarUsuario({campo: '', valido: ''});
+        cambiarNombre1({campo: '', valido: null});
+        cambiarNombre2({campo: '', valido: null});
+        cambiarGenero({campo: '', valido: null});
+        cambiarApellido1({campo: '', valido: null});
+        cambiarApellido2({campo: '', valido: null});
+        cambiarPassword({campo: '', valido: null});
+        cambiarPassword2({campo: '', valido: 'null'});
+        cambiarCorreo({campo: '', valido: null});
+        cambiarTelefono({campo: '', valido: null});
+        
+      }else{
+        cambiarFormularioValido(false);
       }
+    }
 
 
 
