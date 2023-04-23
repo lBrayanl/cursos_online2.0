@@ -29,7 +29,12 @@ const Login = () => {
     };
 
     const login = () => {
-        fetch("/login/"+usuario+"/"+contrasena)
+        //fetch("/login/"+usuario+"/"+contrasena)
+        fetch("/login", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ correo: usuario, password: contrasena })
+          })
             .then((res)=>res.json())
             .then((data)=>{
                 // En "data" esta toda la informacion del usuairo y sus cursos
