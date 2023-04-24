@@ -38,8 +38,9 @@ module.exports = {
         return resultados.rows;
     },
     async inscripcion (usuarios_user_id, cursos_id_cursos, nivel_aprendizaje){
-        const inscritos = await conexion.query("INSERT INTO inscritos (usuarios_user_id,cursos_id_cursos,avance,horasvistas,nivel_aprendizaje,nota,sw_estado) VALUES ("+usuarios_user_id+", "+cursos_id_cursos+",0,0,"+nivel_aprendizaje+",0, 1)");
-        return json(inscritos.rows[0])
+        sql = "INSERT INTO inscritos (usuarios_user_id,cursos_id_cursos,avance,horasvistas,nivel_aprendizaje,nota,sw_estado) VALUES ("+usuarios_user_id+", "+cursos_id_cursos+",0,0,'"+nivel_aprendizaje+"',0, 1)";
+        const inscritos = await conexion.query(sql);
+        return inscritos.rowCount;
     },
     async GetInscrito (req, res, msg){
         try {

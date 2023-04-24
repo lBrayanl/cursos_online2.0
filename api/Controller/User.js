@@ -107,7 +107,7 @@ const nuevo_Usuario = async (req, res, next) => {
     }
     conexionModelo.inscripcion(usuarios_user_id, cursos_id_cursos, nivel_aprendizaje)
     .then(existe=>{ // "Existe" Informacion obtenida de la BDD
-        if(existe[0]){
+        if(existe){
           // Se envia la informacion consultada
           return res.json(existe);
         }else{

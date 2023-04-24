@@ -32,10 +32,20 @@ class BasicExample extends Component {
       this.setState({ redirect: true });
     } else {
       //console.log(isLoggedIn,key )
-      fetch("/inscripcion/"+isLoggedIn, {
+      fetch("/inscripcion", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ usuarios_user_id:this.state.isLoggedIn,cursos_id_cursos:key,nivel_aprendizaje:'Avanzado',sw_estado:1 })
+        body: JSON.stringify({ usuarios_user_id:isLoggedIn,cursos_id_cursos:key,nivel_aprendizaje:'Avanzado',sw_estado:1 })
+      })
+      .then((res)=>res.json())
+      .then((data)=>{
+          // data = 1 se registro con exito
+          console.log(data);
+          if(data == 1){
+              alert("Inscrito con exito!!!");
+          }else{
+              alert("Algo salio mal!!");
+          }
       });
     }
   };
