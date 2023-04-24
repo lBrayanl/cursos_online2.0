@@ -37,11 +37,9 @@ module.exports = {
         const resultados = await conexion.query(sql);
         return resultados.rows;
     },
-    async inscripcion (req, res, next){
-        const inscritos = await conexion.query(
-        `INSERT INTO inscritos (usuarios_user_id,cursos_id_cursos,avance,horasvistas,nivel_aprendizaje,nota,sw_estado) VALUES ($1, $2,$3, $4,$5,$6,$7)`,
-        [usuarios_user_id,cursos_id_cursos,avance,horasvistas,nivel_aprendizaje,nota,sw_estado]);
-        res.json(inscritos.rows[0])
+    async inscripcion (usuarios_user_id, cursos_id_cursos, nivel_aprendizaje){
+        const inscritos = await conexion.query("INSERT INTO inscritos (usuarios_user_id,cursos_id_cursos,avance,horasvistas,nivel_aprendizaje,nota,sw_estado) VALUES ("+usuarios_user_id+", "+cursos_id_cursos+",0,0,"+nivel_aprendizaje+",0, 1)");
+        return json(inscritos.rows[0])
     },
     async GetInscrito (req, res, msg){
         try {

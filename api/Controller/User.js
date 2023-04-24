@@ -101,11 +101,11 @@ const nuevo_Usuario = async (req, res, next) => {
   // Incrision 
 
   const inscripcionContoler = async (req,res,msg) =>{
-    const { usuarios_user_id,cursos_id_cursos,avance,horasvistas,nivel_aprendizaje,nota,sw_estado} = req.body;
-    if(!usuarios_user_id || !cursos_id_cursos || !avance || !horasvistas || !nivel_aprendizaje || !nota || !sw_estado){
+    const { usuarios_user_id,cursos_id_cursos,nivel_aprendizaje,sw_estado} = req.body;
+    if(!usuarios_user_id || !cursos_id_cursos || !nivel_aprendizaje || !sw_estado){
       res.json({Message:"Faltan datos!!"});
     }
-    conexionModelo.inscripcion(usuario)
+    conexionModelo.inscripcion(usuarios_user_id, cursos_id_cursos, nivel_aprendizaje)
     .then(existe=>{ // "Existe" Informacion obtenida de la BDD
         if(existe[0]){
           // Se envia la informacion consultada
