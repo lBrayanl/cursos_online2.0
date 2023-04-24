@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
+import { Redirect } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 import '../css/estilos.css'
 
@@ -16,14 +17,33 @@ class BasicExample extends Component {
       .then((res) => res.json())
       .then((cursos) => {
         this.setState({ cursos: cursos });
-        //console.log(cursos)
       });
+      
+      const isLoggedIn = localStorage.getItem("user_id");
+      if (isLoggedIn) {
+        this.setState({ isLoggedIn: true });
+      }
   }
-
-
+  handleEnroll = (key) => {
+    // verificar usuario logueado
+    const isLoggedIn = localStorage.getItem("user_id");
+    if (!this.state.isLoggedIn) {
+      //direccionar usuario login
+      this.setState({ redirect: true });
+    } else {
+      //console.log(isLoggedIn,key )
+      fetch("/inscripcion/"+isLoggedIn, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ usuarios_user_id:this.state.isLoggedIn,cursos_id_cursos:key,nivel_aprendizaje:'Avanzado',sw_estado:1 })
+      });
+    }
+  };
   render() {
-    const { cursos } = this.state;
-    if (!Array.isArray(cursos) || !cursos.length) {
+    const { cursos, redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/login" />;
+    } else if (!Array.isArray(cursos) || !cursos.length) {
       return (
         <div>
           <p>No hay cursos disponibles</p>
@@ -54,7 +74,7 @@ class BasicExample extends Component {
                   <Card.Text>
                   ${curso.valor}
                   </Card.Text>
-                  <Button variant="primary" href="./curso">Inscribirse</Button>
+                  <Button variant="primary" onClick={() => this.handleEnroll(curso.cursos_id,curso.lvlcurso)}>Inscribirse</Button>
                 </Card.Body>
               </Card>
             </div>
