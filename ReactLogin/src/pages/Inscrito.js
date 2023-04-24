@@ -60,7 +60,7 @@ const Inscrito = () => {
                   <Card.Text>
                   ${curso.valor}
                   </Card.Text>
-                  <Button variant="primary" href="./curso">Inscribirse</Button>;
+                  <Button variant="primary" href="./curso/">Ver</Button>
                 </Card.Body>
               </Card>
             </div>
