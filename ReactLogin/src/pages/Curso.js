@@ -22,8 +22,8 @@ const Curso = (props) => {
 
   // En la consola del navegador puedes ver la informacion al iniciar sesion
   useEffect(() => {
-   // fetch("/cursoUser/${props.id}"+id )
-   fetch("/cursoUser/"+id )
+   // fetch("/cursoUser/${props.id}"+id ) 
+   fetch("/infoCurso/"+id )
       .then((res) => res.json())
       .then((cursosUser) => {
         if (cursosUser) {
@@ -112,7 +112,7 @@ const Curso = (props) => {
         </Accordion>
           </div>
           <div className="col-lg-5">
-            <p>Aprende lo básico de Angular 13 desde cero y paso a paso con Víctor Robles WEB. Instalación, componentes, eventos y más</p>
+            <p>{curso.descripcion}</p>
           </div>
         </div>
         </div>

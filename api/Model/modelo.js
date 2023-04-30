@@ -80,4 +80,14 @@ module.exports = {
         const resultado = await conexion.query(sql);
         return resultado.rowCount;
     },
+    async dataCursos(id_curso){
+        sql = "SELECT * FROM videos WHERE curso_id = "+id_curso+" ORDER BY orden;";
+        const consulta = await conexion.query(sql);
+        return consulta.rows;
+    },
+    async infoCurso(id_curso){
+        sql = "SELECT * FROM cursos WHERE cursos_id = "+id_curso+";";
+        const consulta = await conexion.query(sql);
+        return consulta.rows;
+    }
 }

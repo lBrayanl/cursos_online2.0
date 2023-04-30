@@ -119,11 +119,59 @@ const nuevo_Usuario = async (req, res, next) => {
     })
   }
 
+  //********************************************************** */
+
+  // Datos de los cursos
+
+  const datosCursos = async(req,res,msg) =>{
+    const id_cursos = req.params.curso;
+    if(!id_cursos){
+      res.json({Message:"Falta el id_curso!!"});
+    }
+    conexionModelo.dataCursos(id_cursos)
+    .then(existe=>{ // "Existe" Informacion obtenida de la BDD
+      if(existe){
+        // Se envia la informacion consultada
+        return res.json(existe);
+      }else{
+        return res.json({Message:"No se encontraron registros en este curso"});
+      }
+    })
+    .catch(err=>{ // Se envia el mensaje, por si hay error en la consulta
+        res.json({Message:"Eror en la consulta: "+err.message});
+    })
+  }
+
+  //******************************************************* */
+
+  // Info del curso 
+
+  const informacionCurso = async(req,res,msg) =>{
+    const id_cursos = req.params.curso;
+    if(!id_cursos){
+      res.json({Message:"Falta el id_curso!!"});
+    }
+    conexionModelo.infoCurso(id_cursos)
+    .then(existe=>{ // "Existe" Informacion obtenida de la BDD
+      if(existe){
+        // Se envia la informacion consultada
+        return res.json(existe);
+      }else{
+        return res.json({Message:"No se encontro el curso"});
+      }
+    })
+    .catch(err=>{ // Se envia el mensaje, por si hay error en la consulta
+        res.json({Message:"Eror en la consulta: "+err.message});
+    })
+  }
+
   module.exports = {
     nuevo_Usuario,
     getUsuario,
     _login,
     obtenerCurso,
     cursosUser,
-    inscripcionContoler
+    inscripcionContoler,
+    datosCursos,
+    informacionCurso
   };
