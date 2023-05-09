@@ -12,6 +12,7 @@ const Curso = (props) => {
   const [cursosUsers, setCursosUsuario] = useState([]);
   const [apiCallCompleted, setApiCallCompleted] = useState(false);
   const [error, setError] = useState(null);
+  const [videoInfo, setVideoInfo] = useState(null);
 
   const { id } = useParams();
 
@@ -40,6 +41,17 @@ const Curso = (props) => {
         setApiCallCompleted(true);
       });
   }, [props.id]);
+
+  useEffect(() => {
+    fetch("/cargaVideo")
+      .then((res) => res.json())
+      .then((video) => {
+        setVideoInfo(video);
+      })
+      .catch((error) => {
+        setError(error);
+      })
+  }, []);
 
   if (!Array.isArray(cursosUsers) || !cursosUsers.length) {
     return (
@@ -110,6 +122,10 @@ const Curso = (props) => {
                 </Accordion.Body>
             </Accordion.Item>
         </Accordion>
+          <div>
+            <h4>Si soy</h4>
+            <video width="320" src={videoInfo} height="240" controls></video>
+          </div>
           </div>
           <div className="col-lg-5">
             <p>{curso.descripcion}</p>

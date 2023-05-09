@@ -1,6 +1,7 @@
 const pool = require("../conexion");
 const conexionModelo = require("../Model/modelo");
 const bcrypt = require('bcrypt');
+const cloudinary = require("../cloudinary");
 
 //********************************************** */
 const nuevo_Usuario = async (req, res, next) => {
@@ -165,6 +166,24 @@ const nuevo_Usuario = async (req, res, next) => {
     })
   }
 
+  //************************************************************ */
+
+  //Prueba Obtener video 
+
+  const obtenerVideo = async(req,res,msg)=>{
+    cloudinary.obtenerVideo()
+    .then(existe=>{ // "Existe" Informacion obtenida de la BDD
+      if(existe){
+        // Se envia la informacion consultada
+        return res.json(existe);
+      }else{
+        return res.json({Message:"No se encontro algun video"+existe});
+      }
+    })
+    .catch(err=>{ // Se envia el mensaje, por si hay error en la consulta
+        res.json({Message:"Eror: "+err.message});
+    })
+  }
   module.exports = {
     nuevo_Usuario,
     getUsuario,
@@ -173,5 +192,6 @@ const nuevo_Usuario = async (req, res, next) => {
     cursosUser,
     inscripcionContoler,
     datosCursos,
-    informacionCurso
+    informacionCurso,
+    obtenerVideo
   };
