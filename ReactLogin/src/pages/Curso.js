@@ -27,9 +27,12 @@ const Curso = (props) => {
    fetch("/infoCurso/"+id )
       .then((res) => res.json())
       .then((cursosUser) => {
+        console.log(cursosUser);
         if (cursosUser) {
-          setCursosUsuario(cursosUser);
-          console.log(cursosUser)
+          //info del curso
+          setCursosUsuario(cursosUser.infoCurso[0]);
+          //info de los videos
+          setVideoInfo(cursosUser.video[0]);
         } else {
           throw new Error("No hay cursos");
         }
@@ -42,16 +45,17 @@ const Curso = (props) => {
       });
   }, [props.id]);
 
-  useEffect(() => {
-    fetch("/cargaVideo")
-      .then((res) => res.json())
-      .then((video) => {
-        setVideoInfo(video);
-      })
-      .catch((error) => {
-        setError(error);
-      })
-  }, []);
+
+  //useEffect(() => {
+  //  fetch("/cargaVideo/"+id)
+  //  .then((res) => res.json())
+  //  .then((video) => {
+  //    
+  //    setVideoInfo(video);
+  //  })
+  //  .catch((error) => {
+  //    setError(error);
+  //  }) }, []);
 
   if (!Array.isArray(cursosUsers) || !cursosUsers.length) {
     return (

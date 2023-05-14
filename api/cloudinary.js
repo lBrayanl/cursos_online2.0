@@ -8,7 +8,7 @@ cloudinary.config({
 
 
 module.exports = {
-    async obtenerVideo(){
+    async obtenerVideo(curso_id){
         const options = {
             resource_type: 'video'
         };
@@ -20,8 +20,8 @@ module.exports = {
             .max_results(30)
             .execute();
 
-        console.log(result.resources[0].context);
-        return result.resources[0].url;
+
+        return result;
     }
 }
 

@@ -1,5 +1,7 @@
 const { Router } = require("express");
-const {nuevo_Usuario, getUsuario, obtenerCurso, cursosUser, _login, inscripcionContoler, datosCursos, informacionCurso, obtenerVideo }= require("../Controller/User")
+const {nuevo_Usuario, getUsuario, obtenerCurso, cursosUser, _login, inscripcionContoler, datosCursos, informacionCurso, 
+    //obtenerVideo 
+}= require("../Controller/User")
 
 
 
@@ -15,7 +17,7 @@ router.post("/inscripcion",inscripcionContoler)
 router.get("/dataCurso/:curso",datosCursos)
 router.get("/infoCurso/:curso",informacionCurso)
 
-router.get("/cargaVideo", obtenerVideo)
+//router.get("/cargaVideo/:id_curso", obtenerVideo)
 //router.get("/inscripcion",GetInscrito)
 
 module.exports = router;

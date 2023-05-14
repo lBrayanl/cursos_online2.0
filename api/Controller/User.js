@@ -156,7 +156,9 @@ const nuevo_Usuario = async (req, res, next) => {
     .then(existe=>{ // "Existe" Informacion obtenida de la BDD
       if(existe){
         // Se envia la informacion consultada
-        return res.json(existe);
+        req.params.infoCurso = existe;
+        req.params.id_curso = id_cursos;
+        obtenerVideo(req, res, msg);
       }else{
         return res.json({Message:"No se encontro el curso"});
       }
@@ -170,12 +172,20 @@ const nuevo_Usuario = async (req, res, next) => {
 
   //Prueba Obtener video 
 
-  const obtenerVideo = async(req,res,msg)=>{
-    cloudinary.obtenerVideo()
+  const obtenerVideo = async(req,res)=>{
+    const curso_id = req.params.id_curso;
+    const infoCurso = req.params.infoCurso;
+    cloudinary.obtenerVideo(curso_id)
     .then(existe=>{ // "Existe" Informacion obtenida de la BDD
       if(existe){
-        // Se envia la informacion consultada
-        return res.json(existe);
+        var datos = { infoCurso: [], videos: [] };
+        datos.infoCurso.push(infoCurso);
+        for (let index = 0; index < existe.total_count; index++) {
+          if (existe.resources[index] && existe.resources[index].context && curso_id == existe.resources[index].context.idcursos) {
+            datos.videos.push({orden_id: existe.resources[index].context.order, nombre: existe.resources[index].filename, src: existe.resources[index].url}); 
+          }
+        }
+        return res.json(datos);
       }else{
         return res.json({Message:"No se encontro algun video"+existe});
       }
