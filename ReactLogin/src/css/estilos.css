@@ -39,3 +39,7 @@ main{
     padding: 4%;
     margin-left: 9px;   
 }
+.pip-window {
+    width: 600px;
+    height: 800px;
+  }
