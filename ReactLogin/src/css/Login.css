@@ -261,16 +261,15 @@ a{
     padding: 2px 7px 2px 7px;
 
 }
-.accordion-button{
-    width:450px;
-    min-height:50px;
-    height: auto;
-    border: 1px solid #bfbfbf ;
-    border-radius: 5px;
-    margin: 1% auto;
-    color: black;
+.accordion-button {
+  width: 90vw;
+  min-height: auto;
+  height: 3vw;
+  border: 1px solid #bfbfbf;
+  border-radius: 5px;
+  margin: 1% auto;
+  color: black;
 }
-
 .iniciar{
     font-size: 15px;
     display: flexbox;
