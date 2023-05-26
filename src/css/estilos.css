@@ -1,0 +1,45 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;700&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background: #e5e5e5;
+    font-family: 'Libre Franklin', sans-serif;
+
+}
+
+main{
+    max-width: 800px;
+    width: 90%;
+    margin: auto;
+    padding: 40px;
+}
+
+
+.containerCurso{
+    display:contents;
+    width: 1200px;
+    min-height: 350px;
+    height: auto;
+    text-align: center;
+    font-size: 15px;
+    padding: 4%;
+
+}
+.card{
+    display:inline-flex;
+    width: 1200px;
+    min-height: 350px;
+    height: auto;
+    text-align: center;
+    font-size: 15px;
+    padding: 4%;
+    margin-left: 9px;   
+}
+.pip-window {
+    width: 600px;
+    height: 800px;
+  }
