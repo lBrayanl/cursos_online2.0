@@ -40,11 +40,12 @@ class BasicExample extends Component {
       .then((res)=>res.json())
       .then((data)=>{
           // data = 1 se registro con exito
-          console.log(data);
           if(data == 1){
-              alert("Inscrito con exito!!!");
+            alert("Inscrito con exito!!!");
+          }else if(data == "Ya existe este curso"){
+            alert("Ya tienes inscrito el curso!!");
           }else{
-              alert("Algo salio mal!!");
+            alert("Algo salio mal!!");
           }
       });
     }

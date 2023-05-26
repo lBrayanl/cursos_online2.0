@@ -38,6 +38,12 @@ module.exports = {
         return resultados.rows;
     },
     async inscripcion (usuarios_user_id, cursos_id_cursos, nivel_aprendizaje){
+        sql = "SELECT CASE WHEN cursos_id_cursos = "+cursos_id_cursos+" THEN 1 ELSE 0 END FROM inscritos WHERE usuarios_user_id = "+usuarios_user_id+";";
+        const existe = await conexion.query(sql);
+        if(existe.rowCount > 0){
+            return "existe";
+        }
+
         sql = "INSERT INTO inscritos (usuarios_user_id,cursos_id_cursos,avance,horasvistas,nivel_aprendizaje,nota,sw_estado) VALUES ("+usuarios_user_id+", "+cursos_id_cursos+",0,0,'"+nivel_aprendizaje+"',0, 1)";
         const inscritos = await conexion.query(sql);
         return inscritos.rowCount;

@@ -106,11 +106,17 @@ const nuevo_Usuario = async (req, res, next) => {
     if(!usuarios_user_id || !cursos_id_cursos || !nivel_aprendizaje || !sw_estado){
       res.json({Message:"Faltan datos!!"});
     }
+  
     conexionModelo.inscripcion(usuarios_user_id, cursos_id_cursos, nivel_aprendizaje)
     .then(existe=>{ // "Existe" Informacion obtenida de la BDD
         if(existe){
-          // Se envia la informacion consultada
-          return res.json(existe);
+          if(existe == "existe"){
+            existe = "Ya existe este curso"
+            return res.json(existe);
+          }else{
+            // Se envia la informacion consultada
+            return res.json(existe); 
+          }
         }else{
           return res.json({Message:"No se encontraron datos"});
         }
