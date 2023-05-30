@@ -38,7 +38,7 @@ module.exports = {
         return resultados.rows;
     },
     async inscripcion (usuarios_user_id, cursos_id_cursos, nivel_aprendizaje){
-        sql = "SELECT CASE WHEN cursos_id_cursos = "+cursos_id_cursos+" THEN 1 ELSE 0 END FROM inscritos WHERE usuarios_user_id = "+usuarios_user_id+";";
+        sql = "SELECT usuarios_user_id FROM inscritos WHERE cursos_id_cursos = "+cursos_id_cursos+";";
         const existe = await conexion.query(sql);
         if(existe.rowCount > 0){
             return "existe";
@@ -93,6 +93,12 @@ module.exports = {
     },
     async infoCurso(id_curso){
         sql = "SELECT * FROM cursos WHERE cursos_id = "+id_curso+";";
+        const consulta = await conexion.query(sql);
+        return consulta.rows;
+    },
+    async ExamenDatos(id_curso){
+        sql = "SELECT E.*, EV.* FROM examen AS E INNER JOIN opcion_evalua AS EV ON EV.examen_id = E.id_examen WHERE E.cursos_id = "+id_curso+";";
+        console.log(sql);
         const consulta = await conexion.query(sql);
         return consulta.rows;
     }

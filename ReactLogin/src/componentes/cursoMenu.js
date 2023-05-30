@@ -6,7 +6,6 @@ const user_id = window.localStorage.getItem("user_id")
 
 const Cursos = () => {
     const [cursosUsuario, setCursosUsuario] = useState([]);
-    const [apiCallCompleted, setApiCallCompleted] = useState(false);
     const [error, setError] = useState(null);
   
     useEffect(() => {
@@ -22,9 +21,6 @@ const Cursos = () => {
         .catch((error) => {
           setError(error);
         })
-        .finally(() => {
-          setApiCallCompleted(true);
-        });
     }, []);
   
     if (!Array.isArray(cursosUsuario) || !cursosUsuario.length) {
@@ -35,13 +31,17 @@ const Cursos = () => {
       );
     } else {
     return (
-        <ul>
+      <div className='container'>
+      <ul style={{ paddingLeft: '8px' }}>
         {cursosUsuario.map((curso) => (
           <li key={curso.cursos_id}>
-            <a href={`./curso/`+user_id}>{curso.nombre_curso}</a>
+            <strong><a href={`/curso/${curso.cursos_id}`}>{curso.nombre_curso}</a></strong>
           </li>
         ))}
       </ul>
+    </div>
+    
+       
     );
      }
   };

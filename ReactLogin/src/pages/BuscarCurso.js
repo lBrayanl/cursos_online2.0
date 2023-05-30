@@ -39,6 +39,7 @@ class BasicExample extends Component {
       })
       .then((res)=>res.json())
       .then((data)=>{
+        console.log(data)
           // data = 1 se registro con exito
           if(data == 1){
             alert("Inscrito con exito!!!");
@@ -62,31 +63,29 @@ class BasicExample extends Component {
       );
     } else {
       return (
-        <div>
+         <div className="containerCurso" style={{ display: 'flexWrap ', overflowX: 'auto' }}>
           {cursos.map((curso) => (
-            <div className="containerCurso" key={curso.cursos_id}>
-              <Card style={{ width: '18rem', padding: '4%' }}>
-                <Card.Img variant="top" className='imgCard' src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg" />
-                <Card.Body>
-                  <Card.Title>{curso.nombre_curso}</Card.Title>
-                  <Card.Text>
-                  {curso.profesor}
-                  </Card.Text>
-                  <Card.Text>
-                    <label htmlFor="radio1">★</label>
-                    <label htmlFor="radio2">★</label>
-                  </Card.Text>
-                  <Card.Text>
-                  {curso.idioma}
-                  </Card.Text>
-                  <Card.Text>
-                  Duración:{curso.horasvideo}
-                  </Card.Text>
-                  <Card.Text>
-                  ${curso.valor}
-                  </Card.Text>
-                  <Button variant="primary" onClick={() => this.handleEnroll(curso.cursos_id,curso.lvlcurso)}>Inscribirse</Button>
-                </Card.Body>
+            <div key={curso.cursos_id} style={{ flex: '0 0 calc(100vw / 3)', padding: '4px' }}>
+              <Card style={{ width: '100%', height: '29%' }}>
+                <div style={{ display: 'flex' }}>
+                  <Card.Img variant="top" className='imgCard' src={curso.imagen} style={{ width: '40%', height: '70%' }} />
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', width: '70%' }}>
+                    <Card.Body>
+                      <Card.Title>{curso.nombre_curso}</Card.Title>
+                      <Card.Text>{curso.profesor}</Card.Text>
+                      <Card.Text>
+                        <label htmlFor="radio1">★</label>
+                        <label htmlFor="radio2">★</label>
+                      </Card.Text>
+                      <Card.Text>{curso.idioma}</Card.Text>
+                      <Card.Text>Duración: {curso.horasvideo}</Card.Text>
+                      <Card.Text>${curso.valor}</Card.Text>
+                      <Button variant="primary" onClick={() => this.handleEnroll(curso.cursos_id, curso.lvlcurso)}>
+                        Inscribirse
+                      </Button>
+                    </Card.Body>
+                  </div>
+                </div>
               </Card>
             </div>
           ))}

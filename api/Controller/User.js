@@ -6,6 +6,7 @@ const cloudinary = require("../cloudinary");
 //********************************************** */
 const nuevo_Usuario = async (req, res, next) => {
     const { nombre_1,nombre_2,apellido_1, apellido_2, sw_estado,edad,genero,correo,password } = req.body;
+    
     const hashedPassword = bcrypt.hashSync(password, 10);
     
     conexionModelo.nuevoUsuario(nombre_1,nombre_2,apellido_1, apellido_2, sw_estado,edad,genero,correo,hashedPassword)
@@ -200,6 +201,26 @@ const nuevo_Usuario = async (req, res, next) => {
         res.json({Message:"Eror: "+err.message});
     })
   }
+
+  //************************************************************ */
+
+  //Obtener examen
+
+  const ExamenCurso = async(req,res) =>{
+    const { curso_id } = req.body;
+    conexionModelo.ExamenDatos(curso_id)
+    .then(existe=>{ // "Existe" Informacion obtenida de la BDD
+      if(existe){
+        return res.json(existe);
+      }else{
+        return res.json({Message:"No se encontro info del examen"});
+      }
+    })
+    .catch(err=>{ // Se envia el mensaje, por si hay error en la consulta
+        res.json({Message:"Eror: "+err.message});
+    })
+  }
+
   module.exports = {
     nuevo_Usuario,
     getUsuario,
@@ -209,5 +230,6 @@ const nuevo_Usuario = async (req, res, next) => {
     inscripcionContoler,
     datosCursos,
     informacionCurso,
-    obtenerVideo
+    obtenerVideo,
+    ExamenCurso
   };

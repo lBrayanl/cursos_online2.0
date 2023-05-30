@@ -60,14 +60,39 @@ const Curso = (props) => {
     );
   } else {
   return (
-    <div>
+    <div >
       <MenuPrincipal/>
       <div className="container"> 
-
+      <div className="containerCurso"> 
       {cursosUsers.map((curso) => (
        <div key={curso.cursos_id}>
+        <br/>
        <h3>{curso.nombre_curso}</h3>
-         
+       <div className="row gx-4 gx-lg-5 align-items-center my-5">
+       <div className="col-lg-8">
+        <img variant="top" className='imgCard' src={curso.imagen} style={{ width: '50%', height: '70%' }} />
+        </div>
+        <div className="col-lg-4" style={{ textAlign: 'left' }}>
+          <h3>{curso.descripcion}</h3>
+          <div className="mb-3">
+            <p><strong>Profesor: </strong>{curso.profesor}</p>
+          </div>
+          <div className="mb-3">
+            <p><strong>Idioma: </strong>{curso.idioma}</p>
+          </div>
+          <div className="mb-3">
+            <p><strong>Duración: </strong>{curso.horasvideo}</p>
+          </div>
+          <div className="mb-3">
+            <p><strong>Nivel:</strong>{curso.lvlcurso}</p>
+          </div>
+          <div className="mb-3">
+            <p><strong>Valor: $</strong>{curso.valor}</p>
+          </div>
+        </div>
+        
+      </div>
+
          <div className="row gx-4 gx-lg-5 align-items-center my-5">
          <Accordion defaultActiveKey="0">
            <Accordion.Item eventKey="0">
@@ -83,21 +108,21 @@ const Curso = (props) => {
                  </tr>
                </thead>
                  <tbody>
-                   {Array.isArray(videoInfo) && videoInfo.length > 0 ? (
-                     videoInfo.map((video) => (
-                       <tr key={video.orden_id}>
-                         <td>{video.nombre}</td>
-                         <td>
-                         <video width="440" src={video.src} height="100" controls ref={videoRef}></video><br></br>
+                 {Array.isArray(videoInfo) && videoInfo.length > 0 ? (
+                  videoInfo.sort((a, b) => a.orden_id - b.orden_id).map((video) => (
+                    <tr key={video.orden_id}>
+                      <td>{video.nombre}</td>
+                      <td>
+                        <video width="440" src={video.src} height="100" controls ref={videoRef}></video><br></br>
                         <button onClick={handlePlay}>Ver Video</button>
-                         </td>
-                       </tr>
-                     ))
-                   ) : (
-                     <tr>
-                       <td colSpan="2">No hay videos disponibles</td>
-                     </tr>
-                   )}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="2">No hay videos disponibles</td>
+                  </tr>
+                )}
                  </tbody>
                </Table>
                </Accordion.Body>
@@ -115,7 +140,9 @@ const Curso = (props) => {
        </div>
       ))}
    </div>
+   </div>
    <Footer/>
+
     </div>
    
   );}

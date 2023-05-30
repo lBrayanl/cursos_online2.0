@@ -17,7 +17,7 @@
     "react-bootstrap": "^2.7.2",
     "react-dom": "^16.13.1",
     "react-hooks": "^1.0.1",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^5.3.4",
     "react-scripts": "^5.0.1",
     "styled-components": "^5.3.8",
     "universal-cookie": "^4.0.3"
